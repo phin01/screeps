@@ -1,4 +1,4 @@
-# default
+# screeps
 Code Snippets for Screeps game
 
 https://store.steampowered.com/app/464350/Screeps/
