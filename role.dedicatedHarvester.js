@@ -8,7 +8,7 @@ var roleDedicatedHarvester = {
     run: function(creep) {
 
         
-        // CHECK FOR SOURCES TO HARVEST
+        // CHECK FOR SOURCES TO HARVEST (DEDICATED HARVESTER RECEIVES SOURCE ATTRIBUTE WHEN SPAWNED)
         if(creep.carry.energy < creep.carryCapacity) {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[creep.memory.index]) == ERR_NOT_IN_RANGE) {

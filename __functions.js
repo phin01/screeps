@@ -78,8 +78,9 @@ function harvesterCost(hvArray) {
 
 // IN CASE ALL CONSTRUCTIONS ARE OVER, REPURPOSE BUILDERS INTO TRANSPORTERS
 function repurposeBuilders(currentSpawn) {
+    var currentRoom = Game.spawns[currentSpawn].room.name;
     var constructionSites = Game.spawns[currentSpawn].room.find(FIND_CONSTRUCTION_SITES);
-    var buildersList = listOfCreeps(__constants.ROLE_BUILDER, 0);
+    var buildersList = listOfCreeps(__constants.ROLE_BUILDER, 0, currentRoom);
 
     if(buildersList.length > 0 && constructionSites.length < 1) {
         for (var name in buildersList) {
@@ -246,6 +247,12 @@ function gatherEnergy(creep) {
 			if(containers) {
                 if(creep.withdraw(containers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(containers, {visualizePathStyle: {stroke: '#ffaa00'}});
+                }
+            }
+            else {
+                var nearbySource = creep.pos.findClosestByRange(FIND_SOURCES);
+                if(creep.harvest(nearbySource) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(nearbySource, {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
             }
 }

@@ -1,5 +1,4 @@
-var __constants = require('__constants');
-var __functions = require('__functions');
+var __f = require('__functions');
 	
 	
 	var roleBuilder = {
@@ -24,19 +23,9 @@ var __functions = require('__functions');
                 }
             }
 		}
-		// GATHER ENERGY FROM CONTAINERS
+		// GATHER ENERGY FROM CONTAINERS OR NEARBY SOURCES
 	    else {
-			__functions.gatherEnergy(creep);
-			
-			
-			/*var containers = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: function (structure) { return ((structure.structureType == STRUCTURE_CONTAINER || structure.structureType == STRUCTURE_STORAGE) && structure.store[RESOURCE_ENERGY] > 0); }});
-			if(containers) {
-                if(creep.withdraw(containers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(containers, {visualizePathStyle: {stroke: '#ffaa00'}});
-                }
-			}
-			*/
-
+			__f.gatherEnergy(creep);
 	    }
 	}
 };

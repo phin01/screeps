@@ -1,17 +1,14 @@
-var __constants = require('__constants');
-var TICKS_LEFT = __constants.TICKS_LEFT;
+var __c = require('__constants');
+var __f = require('__functions');
 
 
 var roleHarvester = {
     /** @param {Creep} creep **/
     run: function(creep) {
 
-        // CHECK FOR SOURCES TO LOAD CREEPS
-        if(creep.carry.energy < creep.carryCapacity && creep.ticksToLive > TICKS_LEFT) {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
+        // GATHER ENERGY FROM LOCAL STORAGE OR NEARBY SOURCES
+        if(creep.carry.energy < creep.carryCapacity && creep.ticksToLive > __c.TICKS_LEFT) {
+            __f.gatherEnergy(creep);
         }
         else {
 
@@ -24,7 +21,7 @@ var roleHarvester = {
                     creep.moveTo(towers[0], {visualizePathStyle: {stroke: '#ffffff'}});} 
             }
 
-            // CHECK IF OTHER STRUCTURES ARE IN NEED OF ENERGY
+            // CHECK IF OTHER STRUCTURES ARE IN NEED OF ENERGY (FOCUS ON SPAWNING STRUCTURES, NO STORING ENERGY FROM REGULAR HARVESTERS)
             else {
                 var targets = creep.room.find(FIND_STRUCTURES, {
                     filter: (structure) => {

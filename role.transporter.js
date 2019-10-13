@@ -24,18 +24,17 @@ var roleTransporter = {
             var spawnLink = currentSpawn.pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK}});
             //containers.sort((a,b) => (a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]));
             //containers.reverse();
-            
-            if(spawnLink.energy > spawnLink.energyCapacity * __constants.CONTAINER_THRESHOLD) {
+            if(spawnLink && spawnLink.energy > spawnLink.energyCapacity * __constants.CONTAINER_THRESHOLD) {
                 if(creep.withdraw(spawnLink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawnLink, {visualizePathStyle: {stroke: '#ffffff'}});
                 } 
             }
-            if(fullContainers) {
+            else if(fullContainers) {
                 if(creep.withdraw(fullContainers, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(fullContainers, {visualizePathStyle: {stroke: '#ffaa00'}});
                 }
             }
-            else if(spawnLink.energy > 0) {
+            else if(spawnLink && spawnLink.energy > 0) {
                 if(creep.withdraw(spawnLink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawnLink, {visualizePathStyle: {stroke: '#ffffff'}});
                 } 

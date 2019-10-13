@@ -1,7 +1,9 @@
 var __c = require('__constants');
 var __f = require('__functions');
 
-function spawnRecommendation(SPAWN_NAME, ROOM_NAME) {
+function spawnRecommendation(SPAWN_NAME) {
+
+    var ROOM_NAME = Game.spawns[SPAWN_NAME].room.name;
 
 
     /* ***************************************** */ 
@@ -187,7 +189,7 @@ function spawnRecommendation(SPAWN_NAME, ROOM_NAME) {
         __f.spawnCreepOfType(recommendedRole, recommendedBody, recommendedIndex, ROOM_NAME, SPAWN_NAME);
     }
 
-    console.log(SPAWN_NAME +': ' + (harvester1_List.length + harvester0_List.length) + ' harvesters | ' + builderList.length + ' builders | ' + upgraderList.length + ' upgraders | ' + wallRepairerList.length + ' repairers | ' + transporterList.length + ' transporters --- ' + Game.spawns['' + SPAWN_NAME +''].room.energyAvailable + ' room energy - Next spawn: ' + recommendedRole);
+    console.log('[' + Game.spawns[SPAWN_NAME].room.name + '|' + SPAWN_NAME + ']' +': ' + (harvester1_List.length + harvester0_List.length) + ' harvesters | ' + builderList.length + ' builders | ' + upgraderList.length + ' upgraders | ' + wallRepairerList.length + ' repairers | ' + transporterList.length + ' transporters --- ' + Game.spawns['' + SPAWN_NAME +''].room.energyAvailable + ' room energy - Next spawn: ' + recommendedRole);
 
 }
 

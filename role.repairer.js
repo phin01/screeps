@@ -1,5 +1,5 @@
 var __constants = require('__constants');
-var __functions = require('__functions');
+var __f = require('__functions');
 var TICKS_LEFT = __constants.TICKS_LEFT;
 
 var roleRepairer = {
@@ -25,17 +25,17 @@ var roleRepairer = {
             // LOOK FOR SPECIAL STRUCTURES
             // RETURNS A DOUBLE ARRAY: array[0] = STRUCTURES UNDER THE EMERGENCY REPAIR THRESHOLD
             //                         array[1] = STRUCTURES UNDER THE REGULAR REPAIR THRESHOLD
-            var allMountainRoads = __functions.findStructure(creep, STRUCTURE_ROAD, 700000);
-            var allRoads = __functions.findStructure(creep, STRUCTURE_ROAD);
+            var allMountainRoads = __f.findStructure(creep, STRUCTURE_ROAD, 700000);
+            var allRoads = __f.findStructure(creep, STRUCTURE_ROAD);
 
 
             // CHECK FOR EMERGENCY REPAIRS IN SPECIAL STRUCTURES
-            if(allMountainRoads[0].length > 0) { __functions.fixStructure(creep, allMountainRoads[0]); }
-            else if(allRoads[0].length > 0) { __functions.fixStructure(creep, allRoads[0]); }
+            if(allMountainRoads[0].length > 0) { __f.fixStructure(creep, allMountainRoads[0]); }
+            else if(allRoads[0].length > 0) { __f.fixStructure(creep, allRoads[0]); }
 
             // CHECK FOR REGULAR REPAIRS FOR SPECIAL STRUCTURES
-            else if(allMountainRoads[1].length > 0) { __functions.fixStructure(creep, allMountainRoads[1].sort((a, b) => (a.hits - b.hits))); }
-            else if(allRoads[1].length > 0) { __functions.fixStructure(creep, allRoads[1]); }
+            else if(allMountainRoads[1].length > 0) { __f.fixStructure(creep, allMountainRoads[1].sort((a, b) => (a.hits - b.hits))); }
+            else if(allRoads[1].length > 0) { __f.fixStructure(creep, allRoads[1]); }
             
 
             // REPAIR OTHER STRUCTURES
@@ -45,7 +45,6 @@ var roleRepairer = {
                 });
 
                 if(targets.length > 0) {
-                    console.log('aaa');
                     if(creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
                         creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                     }
