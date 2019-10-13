@@ -276,7 +276,9 @@ function linkTransfer(currentSpawn) {
     var sources = Game.spawns[currentSpawn].room.find(FIND_SOURCES);
     var sourceLink = sources[1].pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK }});
 
-    sourceLink.transferEnergy(spawnLink);
+    if(sourceLink && spawnLink) {
+        sourceLink.transferEnergy(spawnLink);
+    }
     
 }
 

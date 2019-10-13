@@ -10,8 +10,8 @@ var roleWallRepairer = require('role.wall_repairer');
 var roleTransporter = require('role.transporter');
 var roleDedicatedHarvester = require('role.dedicatedHarvester');
 
-// SPAWN ROUTINE SPLIT BY ROOM
-var __room = require('room.routine');
+// SPAWN ROUTINE
+var __spawn = require('spawn.recommendation');
 
 
 module.exports.loop = function () {
@@ -25,9 +25,18 @@ module.exports.loop = function () {
     }
 
     /* ***************************************************** */
-    /*
-    /* SPAWN / ROOM ROUTINES
-    /*
+    /* EXPANSION ROUTINES
+    /* ***************************************************** */
+
+    // ATTEMPT TO CAPTURE NEW ROOM!
+    // __combat.spawnClaimer();
+    // __combat.claimController(32, 2, 'W3S15');
+    //__combat.spawnBuilder('W3S15');
+
+
+
+    /* ***************************************************** */
+    /* SPAWN ROOM ROUTINES
     /* ***************************************************** */
 
     var spawnList = Game.spawns;
@@ -39,21 +48,19 @@ module.exports.loop = function () {
         // REPURPOSE BUILDERS IN SPAWN'S ROOM
         __f.repurposeBuilders(spawn);
 
-        // SPAWN LOGIC SPLIT BY ROOM
-        if (spawn == 'SP1') {
-            __room.runSP1(spawn);
-        }
-        else if (spawn == 'SP2') {
-            __room.runSP2(spawn);
-        }
+        // CREEP SPAWN RECOMMENDATION FOR CURRENT SPAWN'S ROOM
+        __spawn.spawnRecommendation(spawn)
+
+        // IF AVAILABLE, TRANSFER ENERGY BETWEEN LINKS IN SPAWN'S ROOM
+        __f.linkTransfer(spawn);
+       
     }
 
 
     /* ***************************************************** */
-    /*
     /* CREEP WORK ROUTINES
-    /*
     /* ***************************************************** */
+
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
 
@@ -72,12 +79,9 @@ module.exports.loop = function () {
         if(creep.memory.role == 'transporter') { roleTransporter.run(creep); }
     }
 
-    console.log('---------------------------------------------------------------------------------------------------------------------------------------');
 
 
-
-
-
-
+    // END OF CONSOLE MESSAGES
+    console.log('--------------------------------------------------------------------------------------------------------------------------------------- Game Time: ' + Game.time);
 
 };
