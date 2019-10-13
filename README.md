@@ -9,4 +9,4 @@ First time playing around with JavaScript (and GitHub)!
 ------------------------------
 
 Next steps:
-- Currently controlling two rooms, running separate logics for creep functions and spawning process. Unify code to run only one for all rooms.
+- Currently controlling two rooms, running separate logic for creep functions and spawning process. Unify code to the same routines for all rooms.
