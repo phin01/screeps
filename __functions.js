@@ -166,16 +166,19 @@ function towerRepair(currentSpawn) {
         var nearbyRoads = findStructure(tower, STRUCTURE_ROAD, 0);
         var nearbyContainers = findStructure(tower, STRUCTURE_CONTAINER, 0);
         var nearbyLinks = findStructure(tower, STRUCTURE_LINK, 0);
+        var nearbyExtractors = findStructure(tower, STRUCTURE_EXTRACTOR, 0);
 
         // PERFORM EMERGENCY REPAIRS
         if (nearbyRoads[0].length > 0) { tower.repair(nearbyRoads[0][0]); }
         else if (nearbyContainers[0].length > 0) { tower.repair(nearbyContainers[0][0]); }
         else if (nearbyLinks[0].length > 0) { tower.repair(nearbyLinks[0][0]); }
+        else if (nearbyExtractors[0].length > 0) { tower.repair(nearbyExtractors[0][0]); }
 
         // PERFORM REGULAR REPAIRS
         else if (nearbyRoads[1].length > 0) { tower.repair(nearbyRoads[1][0]); }
         else if (nearbyContainers[1].length > 0) { tower.repair(nearbyContainers[1][0]); }
         else if (nearbyLinks[1].length > 0) { tower.repair(nearbyLinks[1][0]); }
+        else if (nearbyExtractors[1].length > 0) { tower.repair(nearbyExtractors[1][0]); }
 
         else { }
 

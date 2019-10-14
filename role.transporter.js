@@ -10,6 +10,8 @@ var roleTransporter = {
         if (creep.carry.energy == 0) { creep.memory.tank = 'EMPTY'};
 
         var currentSpawn = creep.room.find(FIND_MY_SPAWNS)[0];
+        // var currentSpawn = creep.room.find(FIND_MY_SPAWNS);
+        // console.log(currentSpawn);
 
 
         // CHECK FOR CONTAINERS WITH ENERGY REMAINING
@@ -21,7 +23,9 @@ var roleTransporter = {
             var regularContainers = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: function (structure) { return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0; }});
             // LINK CLOSEST TO SPAWN (THE ONE THAT SHOULD BE HARVESTED)
             // var spawnLink = Game.spawns['' + currentSpawn + ''].pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK}});
-            var spawnLink = currentSpawn.pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK}});
+            if(currentSpawn) {
+                var spawnLink = currentSpawn.pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK}});
+            }
             //containers.sort((a,b) => (a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]));
             //containers.reverse();
             if(spawnLink && spawnLink.energy > spawnLink.energyCapacity * __constants.CONTAINER_THRESHOLD) {

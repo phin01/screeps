@@ -21,18 +21,15 @@ function spawnRecommendation(SPAWN_NAME) {
 
     var creepList = []
 
-    // LIST OF TOTAL CREEPS
+    // LIST OF TOTAL CREEPS PER ROOM
     var totalCreeps = 0; 
     var i = 0;
     for(var creep in Game.creeps) {
-        //console.log(i);
-        creepList.push({
-            role: 'aaa' + Game.creeps[creep].memory.role,
-            eita: 'bbb' + creep
-        })
-
-        totalCreeps++;
+        if(Game.creeps[creep].memory.room == ROOM_NAME) {
+            totalCreeps++;
+        }
      };
+
 
     
     // CURRENT ENERGY LEVEL AVAILABLE FOR SPAWNING AND TOTAL ENERGY CAPACITY
@@ -135,6 +132,7 @@ function spawnRecommendation(SPAWN_NAME) {
     // IF AVAILABLE ENERGY IN THE ROOM IS NOT ABOVE THE REQUIRED THRESHOLD, ALSO WAIT
     // FINALLY, ALSO SUSPEND SPAWNING WHILE ANY ATTACKS ARE UNDERWAY
 
+    
 
 
     if(!recommendedRole && !__f.harvesterDying() && actualEnergy > possibleEnergy * __c.MINIMUM_ENERGY_RATIO && !__f.checkAttack(SPAWN_NAME)) {
