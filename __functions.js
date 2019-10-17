@@ -275,12 +275,15 @@ function gatherEnergySource(creep) {
 /* **************************************************************************** */
 
 function linkTransfer(currentSpawn) {
+    // LINK CLOSEST TO SPAWN
     var spawnLink = Game.spawns[currentSpawn].pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK }});
-    var sources = Game.spawns[currentSpawn].room.find(FIND_SOURCES);
-    var sourceLink = sources[1].pos.findClosestByRange(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK }});
+    // ALL OTHER LINKS, SORTED FROM DISTANCE TO SPAWN
+    var otherLinks = Game.spawns[currentSpawn].room.find(FIND_STRUCTURES, { filter: function(link) { return link.structureType == STRUCTURE_LINK }});
+    _.sortBy(otherLinks, s => Game.spawns[currentSpawn].pos.getRangeTo(s))
 
-    if(sourceLink && spawnLink) {
-        sourceLink.transferEnergy(spawnLink);
+    // TRANSFER FROM FURTHEST LINK TO SPAWN LINK
+    if(otherLinks.length > 0 && spawnLink) {
+        otherLinks[0].transferEnergy(spawnLink);
     }
     
 }

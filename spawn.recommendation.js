@@ -117,7 +117,7 @@ function spawnRecommendation(SPAWN_NAME) {
             // CARRY BODY PARTS = 50 ENERGY
             else if (recommendedRole == __c.ROLE_TRANSPORTER) {
                 var actionParts = Math.floor((actualEnergy - 400) / 50);
-                if (actionParts > 5) { actionParts = 5}
+                if (actionParts > 8) { actionParts = 8}
                 for (var i = 0; i < actionParts; i++) {
                     recommendedBody.push(creepAction);
                 }
@@ -174,7 +174,7 @@ function spawnRecommendation(SPAWN_NAME) {
             if(recommendedRole == __c.ROLE_UPGRADER ) { actionCost = 100;}
 
             var actionParts = Math.floor((actualEnergy - 400) / actionCost);
-            if (actionParts > 5) { actionParts = 5}
+            if (actionParts > 6) { actionParts = 6}
             for (var i = 0; i < actionParts; i++) {
                 recommendedBody.push(creepAction);
             }
