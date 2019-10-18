@@ -1,5 +1,5 @@
-var __constants = require('__constants');
-var TICKS_LEFT = __constants.TICKS_LEFT;
+var __c = require('__constants');
+
 
 
 var roleTransporter = {
@@ -15,10 +15,10 @@ var roleTransporter = {
 
 
         // CHECK FOR CONTAINERS WITH ENERGY REMAINING
-        if(creep.memory.tank == 'EMPTY' && creep.ticksToLive > TICKS_LEFT) {
+        if(creep.memory.tank == 'EMPTY' && creep.ticksToLive > __c.TICKS_LEFT) {
 
             // LIST OF CONTAINERS ABOVE THE MINIMUM THRESHOLD (CLEAR THEM SO HARVESTERS CAN KEEP WORKING!)
-            var fullContainers = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: function (structure) { return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > structure.storeCapacity * __constants.CONTAINER_THRESHOLD; }});
+            var fullContainers = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: function (structure) { return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > structure.storeCapacity * __c.CONTAINER_THRESHOLD; }});
             // LIST OF CONTAINERS AT A LOWER LEVEL (THESE WILL DO, I SUPPOSE...)
             var regularContainers = creep.pos.findClosestByRange(FIND_STRUCTURES, { filter: function (structure) { return structure.structureType == STRUCTURE_CONTAINER && structure.store[RESOURCE_ENERGY] > 0; }});
             // LINK CLOSEST TO SPAWN (THE ONE THAT SHOULD BE HARVESTED)
@@ -28,7 +28,7 @@ var roleTransporter = {
             }
             //containers.sort((a,b) => (a.store[RESOURCE_ENERGY] - b.store[RESOURCE_ENERGY]));
             //containers.reverse();
-            if(spawnLink && spawnLink.energy > spawnLink.energyCapacity * __constants.CONTAINER_THRESHOLD) {
+            if(spawnLink && spawnLink.energy > spawnLink.energyCapacity * __c.CONTAINER_THRESHOLD) {
                 if(creep.withdraw(spawnLink, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawnLink, {visualizePathStyle: {stroke: '#ffffff'}});
                 } 
@@ -57,7 +57,7 @@ var roleTransporter = {
         else {
             // CHECK IF TOWERS ARE AVAILABLE AND IN NEED OF ENERGY (HIGH PRIORITY!)
             var towers = creep.room.find(FIND_STRUCTURES, {
-                filter: (structure) => { return structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity; }});
+                filter: (structure) => { return structure.structureType == STRUCTURE_TOWER && structure.energy < structure.energyCapacity * __c.TOWER_RECHARGE_THRESHOLD; }});
 
             towers.sort((a, b) => (a.energy - b.energy));
 
