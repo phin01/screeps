@@ -31,11 +31,11 @@ var roleWallRepairer = {
 
 
             // CHECK FOR EMERGENCY REPAIRS IN SPECIAL STRUCTURES
-            if(allWalls[0].length > 0) { __functions.fixStructure(creep, allWalls[0].sort((a, b) => (a.hits - b.hits))); }
-            else if(allRamparts[0].length > 0) { __functions.fixStructure(creep, allRamparts[0]); }
+            // if(allWalls[0].length > 0) { __functions.fixStructure(creep, allWalls[0].sort((a, b) => (a.hits - b.hits))); }
+            // else if(allRamparts[0].length > 0) { __functions.fixStructure(creep, allRamparts[0]); }
 
-            // if(allRamparts[0].length > 0) { __functions.fixStructure(creep, allRamparts[0]); }
-            // else if(allWalls[0].length > 0) { __functions.fixStructure(creep, allWalls[0].sort((a, b) => (a.hits - b.hits))); }
+            if(allRamparts[0].length > 0) { __functions.fixStructure(creep, allRamparts[0]); }
+            else if(allWalls[0].length > 0) { __functions.fixStructure(creep, allWalls[0].sort((a, b) => (a.hits - b.hits))); }
             
 
             // CHECK FOR REGULAR REPAIRS FOR SPECIAL STRUCTURES

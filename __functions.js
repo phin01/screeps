@@ -168,8 +168,14 @@ function towerRepair(currentSpawn) {
         var nearbyLinks = findStructure(tower, STRUCTURE_LINK, 0);
         var nearbyExtractors = findStructure(tower, STRUCTURE_EXTRACTOR, 0);
 
+        // START INITIAL MAINTENANCE OF RAMPARTS
+        initialRamparts = spawnBase.room.find(FIND_STRUCTURES, { filter: (structure) => { return ((structure.structureType == STRUCTURE_RAMPART) && structure.hits < __constants.RAMPART_INITIAL_REPAIR);}});
+        if(initialRamparts.length > 0) {
+            tower.repair(initialRamparts[0]);
+        }
+
         // PERFORM EMERGENCY REPAIRS
-        if (nearbyRoads[0].length > 0) { tower.repair(nearbyRoads[0][0]); }
+        else if (nearbyRoads[0].length > 0) { tower.repair(nearbyRoads[0][0]); }
         else if (nearbyContainers[0].length > 0) { tower.repair(nearbyContainers[0][0]); }
         else if (nearbyLinks[0].length > 0) { tower.repair(nearbyLinks[0][0]); }
         else if (nearbyExtractors[0].length > 0) { tower.repair(nearbyExtractors[0][0]); }
